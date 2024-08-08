@@ -1,0 +1,19 @@
+server:
+    port: 8080
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/codejavadb?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+        username: root
+        password: emberes1617.
+
+## Hibernate properties
+    jpa:
+        hibernate:
+            ddl-auto: update
+        open-in-view: false
+
+    jwt:
+        secret-key: 3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b
+# 24h in millisecond
+        expiration-time: 86400000
