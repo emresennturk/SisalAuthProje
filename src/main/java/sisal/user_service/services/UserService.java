@@ -31,14 +31,14 @@ public class UserService {
 
     public List<UserResponse> allUsers() {
         List<User> users = new ArrayList<>();
-        userRepository.findAll().forEach(users::add); // Kullanıcıları listeye ekler
+        userRepository.findAll().forEach(users::add); 
     
         List<UserResponse> userResponses = new ArrayList<>();
         for (User user : users) {
-            userResponses.add(new UserResponse(user.getId(), user.getEmail())); // Her User'ı DTO'ya dönüştürüp listeye ekler
+            userResponses.add(new UserResponse(user.getId(), user.getEmail())); 
         }
     
-        return userResponses; // DTO'ların listesini döner
+        return userResponses; 
     }
 
     public User createAdministrator(RegisterUserDto input) {
