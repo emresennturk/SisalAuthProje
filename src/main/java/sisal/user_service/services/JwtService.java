@@ -23,7 +23,7 @@ public class JwtService {
     private String secretKey;
 
     @Value("${spring.jwt.expiration-time}")
-    private long keyExpirationTime;
+    private Long keyExpirationTime;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -42,7 +42,7 @@ public class JwtService {
         return buildToken(extraClaims, userDetails, keyExpirationTime);
     }
 
-    public long getExpirationTime() {
+    public Long getExpirationTime() {
         return keyExpirationTime;
     }
 
