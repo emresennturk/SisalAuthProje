@@ -7,12 +7,16 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -82,6 +86,23 @@ class AuthenticationServiceTest {
         assertEquals(userRole, user.getRole());
     }
 
+     @Test
+    void testSignup_ReturnsNullWhenRoleNotFound() {
+        
+        RegisterUserDto input = new RegisterUserDto();
+        
+
+        when(roleRepository.findByName(RoleEnum.USER)).thenReturn(Optional.empty());
+
+        
+        User result = authenticationService.signup(input);
+
+        
+        assertNull(result, "Expected signup to return null when role is not found");
+        verify(roleRepository, times(1)).findByName(RoleEnum.USER);
+        verify(userRepository, never()).save(any(User.class));
+    }
+    
     @Test
     void testAuthenticateSuccess() {
         
