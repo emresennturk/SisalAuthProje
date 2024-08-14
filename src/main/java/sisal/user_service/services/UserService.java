@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import sisal.user_service.dtos.RegisterUserDto;
 import sisal.user_service.entities.Role;
 import sisal.user_service.entities.RoleEnum;
@@ -15,6 +16,7 @@ import sisal.user_service.repositories.RoleRepository;
 import sisal.user_service.repositories.UserRepository;
 import sisal.user_service.response.UserResponse;
 
+@Slf4j
 @Service
 public class UserService {
 
@@ -30,6 +32,7 @@ public class UserService {
     }
 
     public List<UserResponse> allUsers() {
+        log.info("Fetching all users from the database");
         List<User> users = new ArrayList<>();
         userRepository.findAll().forEach(users::add); 
     
@@ -37,7 +40,7 @@ public class UserService {
         for (User user : users) {
             userResponses.add(new UserResponse(user.getId(), user.getEmail())); 
         }
-    
+        log.info("Fetched {} users", userResponses.size());
         return userResponses; 
     }
 

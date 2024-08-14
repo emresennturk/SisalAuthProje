@@ -18,8 +18,10 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import sisal.user_service.services.JwtService;
 
+@Slf4j
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter{
     private final HandlerExceptionResolver handlerExceptionResolver;
@@ -73,6 +75,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
             filterChain.doFilter(request, response);
         } catch (ServletException | IOException | UsernameNotFoundException exception) {
+            log.error("Error occurred during JWT authentication", exception);
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
     }

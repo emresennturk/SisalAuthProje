@@ -27,7 +27,11 @@ public class Role {
     @Column(nullable = false)
     private String description;
 
-
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    
     public Role setName(RoleEnum name) {
         this.name = name;
         return this;
@@ -46,4 +50,6 @@ public class Role {
                 ", description='" + description + 
                 '}';
     }
+
+    
 }

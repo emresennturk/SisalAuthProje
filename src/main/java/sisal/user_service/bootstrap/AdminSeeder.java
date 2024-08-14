@@ -47,7 +47,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent>{
         userDto.setBirthDate(new Date());
         userDto.setCountryOfBirth("TR");
         userDto.setEmail("super.admin@email.com");
-        userDto.setPassword("123456");
+        userDto.setPassword("12345667");
 
         Optional<Role> optionalRole = roleRepository.findByName(RoleEnum.ADMIN);
         Optional<User> optionalUser = userRepository.findByEmail(userDto.getEmail());
