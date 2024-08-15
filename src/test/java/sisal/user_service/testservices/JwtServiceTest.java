@@ -4,16 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import io.jsonwebtoken.Claims;
 import sisal.user_service.services.JwtService;
 
+@ExtendWith(MockitoExtension.class)
  class JwtServiceTest {
 
     @InjectMocks
@@ -27,7 +29,6 @@ import sisal.user_service.services.JwtService;
 
     @BeforeEach
      void setUp() {
-        MockitoAnnotations.openMocks(this);
         ReflectionTestUtils.setField(jwtService, "secretKey", secretKey);
         ReflectionTestUtils.setField(jwtService, "keyExpirationTime", expirationTime);
 
